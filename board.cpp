@@ -13,6 +13,7 @@ Board::Board()
 }
 
 // Define the makeBoard() function
+// Test
 void Board::makeBoard()
 {
     // Output the x-axis values
