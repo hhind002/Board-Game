@@ -74,68 +74,96 @@ void PlayerTwo::movePiece2(Board& b, Referee& r)
             validate(b, c);
         }
 
+        // Reset the values for the next tests
         c = 0;
         u = 0;
 
-       validateLocation(b, a, d, c);
-       cout << "Hello" << endl;
+        // Check to see if the values are valid
+        validateLocation(b, a, d, c);
     }
 
-    cout << "done" << endl;
+    // Update the piece to the new location
     b.grid[toRow0][toCol0] = b.grid[fromRow0][fromCol0];
+
+    // Clear the old location of the piece
     b.grid[fromRow0][fromCol0] = ' ';
+
+    // Create a function call to check if the piece is capturing an enemy piece
     checkCapture(b, r, toRow0, toCol0);
-    cerr << "about to go" << endl;
-    checkCornerCapture(b, r, toRow0,toCol0);
-    cerr << "Should be back" << endl;
+
+    // Create a function call to check if the enemy piece is cornered
+    checkCornerCapture(b, r, toRow0, toCol0);
+    
+    // Create a function call to check if the piece is capturing a duke
     checkCaptureDuke(b, toRow0, toCol0);
-    //b.printBoard();
+
+    // Print the updated board
+    b.printBoard();
 
 }
 
 // Create a function for checkCapture() function
 void PlayerTwo::checkCapture(Board& b, Referee& r, int toRow0, int toCol0)
 {
-    // Declare the local variable
+     // Declare the local variable
     char u = 'o';
 
+    // Check to see if there is an enemy piece below
     if (b.grid[toRow0 + 2][toCol0] == 'o')
     {
+        // Check to see if there is a friendly piece below the enemy piece
         if (b.grid[toRow0 + 4][toCol0] == 'x')
             {
+                // Remove the enemy from the board
                 b.grid[toRow0 + 2][toCol0] = ' ';
-                
+
+                // Update the score
                 r.countScore(u);
             }
     }
 
+    // Check to see if there is an enemy piece above
     else if (b.grid[toRow0 - 2][toCol0] == 'o')
     {
+        // Check to see if there is a friendly piece above the enemy piece
         if (b.grid[toRow0 - 4][toCol0] == 'x')
             {
+                // Remove the enemy from the board
                 b.grid[toRow0 - 2][toCol0] = ' ';
+
+                // Update the score
                 r.countScore(u);
             }
     }
 
+    // Check to see if there is an enemy piece to the right
     else if (b.grid[toRow0][toCol0 + 2] == 'o')
     {
+        // Check to see if there is a friendly piece to the right of the enemy
         if (b.grid[toRow0][toCol0 + 4] == 'x')
             {
+                // Remove the enemy from the board
                 b.grid[toRow0][toCol0 + 2] = ' ';
+
+                // Update the score
                 r.countScore(u);
             }
     }
 
+    // Check to see if there is an enemy piece to the left
     else if (b.grid[toRow0][toCol0 - 2] == 'o')
     {
+        // Check to see if there is a friendly piece to the left of the enemy
         if (b.grid[toRow0][toCol0 - 4] == 'x')
             {
+                // Remove the enemy from the board
                 b.grid[toRow0][toCol0 - 2] = ' ';
+
+                // Update the score
                 r.countScore(u);
             }
     }
-
+    // Otherwise do nothing
     else
         return;
 }
@@ -967,7 +995,6 @@ void PlayerTwo::validateLocation(Board&b, bool& a, bool& d, bool& c)
 // Define the checkCornerCapture() function
 void PlayerTwo::checkCornerCapture(Board& b, Referee& r, int toRow0, int toCol0)
 {
-    cerr << "running" << endl;
     // Declare the local variable
     char u = '1';
 
@@ -1055,14 +1082,10 @@ void PlayerTwo::checkCornerCapture(Board& b, Referee& r, int toRow0, int toCol0)
 
     else if (b.grid[toRow0][toCol0 - 2] == 'o')
     {
-        cerr << " I see o" << endl;
-
        if(b.grid[toRow0 - 2][toCol0 - 2] == 'x')
         {
-            cerr << "I see x" << endl;
            if(b.grid[toRow0][toCol0 - 2] == b.grid[16][2])
             {
-                cerr << " I am removing " << endl;
                 // Remove the enemy from the board
                 b.grid[toRow0][toCol0 - 2] = ' ';
                         
@@ -1074,10 +1097,8 @@ void PlayerTwo::checkCornerCapture(Board& b, Referee& r, int toRow0, int toCol0)
     
         else if(b.grid[toRow0 + 2][toCol0 - 2] == 'x')
         {
-            cerr << "I see x" << endl;
             if(b.grid[toRow0][toCol0 - 2] == b.grid[2][2])
             {
-                 cerr << " I am removing " << endl;
                 // Remove the enemy from the board
                 b.grid[toRow0][toCol0 - 2] = ' ';
                         
