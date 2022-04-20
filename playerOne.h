@@ -33,6 +33,7 @@ class PlayerOne
     void selectingPiece(Board& b, Referee& r, bool& u, bool& c);
     void selectingLocation(bool& u);
     void checkCaptureDuke(Board& b, int toRow0, int toCol0);
+    void checkCornerCapture(Board& b, Referee& r, int toRow0, int toCol0);
     void validateLocation(Board&b, bool& a, bool& d, bool& c);
     void validate(Board& b, bool& c);
 };

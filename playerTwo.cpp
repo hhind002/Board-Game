@@ -78,13 +78,18 @@ void PlayerTwo::movePiece2(Board& b, Referee& r)
         u = 0;
 
        validateLocation(b, a, d, c);
+       cout << "Hello" << endl;
     }
 
+    cout << "done" << endl;
     b.grid[toRow0][toCol0] = b.grid[fromRow0][fromCol0];
     b.grid[fromRow0][fromCol0] = ' ';
     checkCapture(b, r, toRow0, toCol0);
+    cerr << "about to go" << endl;
+    checkCornerCapture(b, r, toRow0,toCol0);
+    cerr << "Should be back" << endl;
     checkCaptureDuke(b, toRow0, toCol0);
-    b.printBoard();
+    //b.printBoard();
 
 }
 
@@ -957,4 +962,128 @@ void PlayerTwo::validateLocation(Board&b, bool& a, bool& d, bool& c)
 
         else
             a = 1;
+}
+
+// Define the checkCornerCapture() function
+void PlayerTwo::checkCornerCapture(Board& b, Referee& r, int toRow0, int toCol0)
+{
+    cerr << "running" << endl;
+    // Declare the local variable
+    char u = '1';
+
+    if (b.grid[toRow0 + 2][toCol0] == 'o')
+    {
+        if(b.grid[toRow0 + 2][toCol0 - 2] == 'x')
+        {
+            if(b.grid[toRow0 + 2][toCol0] == b.grid[16][16])
+            {
+                // Remove the enemy from the board
+                b.grid[toRow0 + 2][toCol0] = ' ';
+                        
+                // Update the score
+                r.countScore(u);
+            }
+        }
+
+
+        else if(b.grid[toRow0 + 2][toCol0 + 2] == 'x')
+        {
+            if(b.grid[toRow0 + 2][toCol0] == b.grid[16][2])
+            {
+                // Remove the enemy from the board
+                b.grid[toRow0 + 2][toCol0] = ' ';
+                        
+                // Update the score
+                r.countScore(u);
+            }
+        }
+    }
+
+    else if (b.grid[toRow0 - 2][toCol0] == 'o')
+    {
+        if(b.grid[toRow0 - 2][toCol0 - 2] == 'x')
+        {
+           if(b.grid[toRow0 - 2][toCol0] == b.grid[2][16])
+            {
+                // Remove the enemy from the board
+                b.grid[toRow0 - 2][toCol0] = ' ';
+                        
+                // Update the score
+                r.countScore(u);
+            }      
+        }
+        
+        else if(b.grid[toRow0 - 2][toCol0 + 2] == 'x')
+        {
+            if(b.grid[toRow0 - 2][toCol0] == b.grid[2][2])
+            {
+                // Remove the enemy from the board
+                b.grid[toRow0 - 2][toCol0] = ' ';
+                        
+                // Update the score
+                r.countScore(u);
+            }        
+        }
+    }
+
+    else if (b.grid[toRow0][toCol0 + 2] == 'o')
+    {
+        if(b.grid[toRow0 - 2][toCol0 + 2] == 'x')
+        {
+            if(b.grid[toRow0][toCol0 + 2] == b.grid[16][16])
+            {
+                // Remove the enemy from the board
+                b.grid[toRow0][toCol0 + 2] = ' ';
+                        
+                // Update the score
+                r.countScore(u);
+            }
+        }
+          
+        else if(b.grid[toRow0 + 2][toCol0 + 2] == 'x')
+        {
+            if(b.grid[toRow0][toCol0 + 2] == b.grid[2][16])
+            {
+                // Remove the enemy from the board
+                b.grid[toRow0][toCol0 + 2] = ' ';
+                        
+                // Update the score
+                r.countScore(u);
+            }  
+        }
+    }
+
+    else if (b.grid[toRow0][toCol0 - 2] == 'o')
+    {
+        cerr << " I see o" << endl;
+
+       if(b.grid[toRow0 - 2][toCol0 - 2] == 'x')
+        {
+            cerr << "I see x" << endl;
+           if(b.grid[toRow0][toCol0 - 2] == b.grid[16][2])
+            {
+                cerr << " I am removing " << endl;
+                // Remove the enemy from the board
+                b.grid[toRow0][toCol0 - 2] = ' ';
+                        
+                // Update the score
+                r.countScore(u);
+            }  
+        }
+
+    
+        else if(b.grid[toRow0 + 2][toCol0 - 2] == 'x')
+        {
+            cerr << "I see x" << endl;
+            if(b.grid[toRow0][toCol0 - 2] == b.grid[2][2])
+            {
+                 cerr << " I am removing " << endl;
+                // Remove the enemy from the board
+                b.grid[toRow0][toCol0 - 2] = ' ';
+                        
+                // Update the score
+                r.countScore(u);
+            }  
+        }
+    }
 }

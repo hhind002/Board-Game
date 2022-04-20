@@ -87,6 +87,9 @@ void PlayerOne::movePiece1(Board& b, Referee& r)
     // Create a function call to check if the piece is capturing an enemy piece
     checkCapture(b, r, toRow0, toCol0);
 
+    // Create a function call to check if the enemy piece is cornered
+    checkCornerCapture(b, r, toRow0, toCol0);
+
     // Create a function call to check if the piece is capturing a duke
     checkCaptureDuke(b, toRow0, toCol0);
     
@@ -1016,4 +1019,121 @@ void PlayerOne::validate(Board& b, bool& c)
     // Otherwise allow the values to become valid
     else
         c = 1;
+}
+
+// Define the checkCornerCapture() function
+void PlayerOne::checkCornerCapture(Board& b, Referee& r, int toRow0, int toCol0)
+{
+    // Declare the local variable
+    char u = 'x';
+
+    if (b.grid[toRow0 + 2][toCol0] == 'x')
+    {
+        if(b.grid[toRow0 + 2][toCol0 - 2] == 'o')
+        {
+            if(b.grid[toRow0 + 2][toCol0] == b.grid[16][16])
+            {
+                // Remove the enemy from the board
+                b.grid[toRow0 + 2][toCol0] = ' ';
+                        
+                // Update the score
+                r.countScore(u);
+            }
+        }
+
+
+        else if(b.grid[toRow0 + 2][toCol0 + 2] == 'o')
+        {
+            if(b.grid[toRow0 + 2][toCol0] == b.grid[16][2])
+            {
+                // Remove the enemy from the board
+                b.grid[toRow0 + 2][toCol0] = ' ';
+                        
+                // Update the score
+                r.countScore(u);
+            }
+        }
+    }
+
+    else if (b.grid[toRow0 - 2][toCol0] == 'x')
+    {
+        if(b.grid[toRow0 - 2][toCol0 - 2] == 'o')
+        {
+           if(b.grid[toRow0 - 2][toCol0] == b.grid[2][16])
+            {
+                // Remove the enemy from the board
+                b.grid[toRow0 - 2][toCol0] = ' ';
+                        
+                // Update the score
+                r.countScore(u);
+            }      
+        }
+        
+        else if(b.grid[toRow0 - 2][toCol0 + 2] == 'o')
+        {
+            if(b.grid[toRow0 - 2][toCol0] == b.grid[2][2])
+            {
+                // Remove the enemy from the board
+                b.grid[toRow0 - 2][toCol0] = ' ';
+                        
+                // Update the score
+                r.countScore(u);
+            }        
+        }
+    }
+
+    else if (b.grid[toRow0][toCol0 + 2] == 'x')
+    {
+        if(b.grid[toRow0 - 2][toCol0 + 2] == 'o')
+        {
+            if(b.grid[toRow0][toCol0 + 2] == b.grid[16][16])
+            {
+                // Remove the enemy from the board
+                b.grid[toRow0][toCol0 + 2] = ' ';
+                        
+                // Update the score
+                r.countScore(u);
+            }
+        }
+          
+        else if(b.grid[toRow0 + 2][toCol0 + 2] == 'o')
+        {
+            if(b.grid[toRow0][toCol0 + 2] == b.grid[2][16])
+            {
+                // Remove the enemy from the board
+                b.grid[toRow0][toCol0 + 2] = ' ';
+                        
+                // Update the score
+                r.countScore(u);
+            }  
+        }
+    }
+
+    else if (b.grid[toRow0][toCol0 - 2] == 'x')
+    {
+       if(b.grid[toRow0 - 2][toCol0 - 2] == 'o')
+        {
+           if(b.grid[toRow0][toCol0 - 2] == b.grid[16][2])
+            {
+                // Remove the enemy from the board
+                b.grid[toRow0][toCol0 - 2] = ' ';
+                        
+                // Update the score
+                r.countScore(u);
+            }  
+        }
+
+    
+        else if(b.grid[toRow0 + 2][toCol0 - 2] == 'o')
+        {
+            if(b.grid[toRow0][toCol0 - 2] == b.grid[2][2])
+            {
+                // Remove the enemy from the board
+                b.grid[toRow0][toCol0 - 2] = ' ';
+                        
+                // Update the score
+                r.countScore(u);
+            }  
+        }
+    }
 }
