@@ -32,7 +32,7 @@ void PlayerOne::movePiece1(Board& b, Referee& r)
     bool d = 1;
 
     // Create an output statement that prompts for user input on what piece to move and allows for input
-    cout << "\nPlayer One's turn!\nPlease select a piece to move using its coordinates. " << endl;
+    cout << "\nPlayer One's turn!\nPlease select a piece to move using its coordinates. (You are 'o' / 'O')" << endl;
     cout << "X-Coordinate: " << flush;
     cin >> fromRow;
     cout << "Y-Coordinate: " << flush;
@@ -1027,11 +1027,11 @@ void PlayerOne::checkCornerCapture(Board& b, Referee& r, int toRow0, int toCol0)
     // Declare the local variable
     char u = 'x';
 
-    if (b.grid[toRow0 + 2][toCol0] == 'x')
+    if ((b.grid[toRow0 + 2][toCol0] == 'x') && (&b.grid[toRow0][toCol0] == &b.grid[14][2]) || (&b.grid[toRow0][toCol0] == &b.grid[14][16]))
     {
         if(b.grid[toRow0 + 2][toCol0 - 2] == 'o')
         {
-            if(b.grid[toRow0 + 2][toCol0] == b.grid[16][16])
+            if(&b.grid[toRow0 + 2][toCol0] == &b.grid[16][16])
             {
                 // Remove the enemy from the board
                 b.grid[toRow0 + 2][toCol0] = ' ';
@@ -1044,7 +1044,7 @@ void PlayerOne::checkCornerCapture(Board& b, Referee& r, int toRow0, int toCol0)
 
         else if(b.grid[toRow0 + 2][toCol0 + 2] == 'o')
         {
-            if(b.grid[toRow0 + 2][toCol0] == b.grid[16][2])
+            if(&b.grid[toRow0 + 2][toCol0] == &b.grid[16][2])
             {
                 // Remove the enemy from the board
                 b.grid[toRow0 + 2][toCol0] = ' ';
@@ -1055,11 +1055,11 @@ void PlayerOne::checkCornerCapture(Board& b, Referee& r, int toRow0, int toCol0)
         }
     }
 
-    else if (b.grid[toRow0 - 2][toCol0] == 'x')
+    else if ((b.grid[toRow0 - 2][toCol0] == 'x') && (&b.grid[toRow0][toCol0] == &b.grid[4][2]) || (&b.grid[toRow0][toCol0] == &b.grid[4][16]))
     {
         if(b.grid[toRow0 - 2][toCol0 - 2] == 'o')
         {
-           if(b.grid[toRow0 - 2][toCol0] == b.grid[2][16])
+           if(&b.grid[toRow0 - 2][toCol0] == &b.grid[2][16])
             {
                 // Remove the enemy from the board
                 b.grid[toRow0 - 2][toCol0] = ' ';
@@ -1071,7 +1071,7 @@ void PlayerOne::checkCornerCapture(Board& b, Referee& r, int toRow0, int toCol0)
         
         else if(b.grid[toRow0 - 2][toCol0 + 2] == 'o')
         {
-            if(b.grid[toRow0 - 2][toCol0] == b.grid[2][2])
+            if(&b.grid[toRow0 - 2][toCol0] == &b.grid[2][2])
             {
                 // Remove the enemy from the board
                 b.grid[toRow0 - 2][toCol0] = ' ';
@@ -1082,11 +1082,11 @@ void PlayerOne::checkCornerCapture(Board& b, Referee& r, int toRow0, int toCol0)
         }
     }
 
-    else if (b.grid[toRow0][toCol0 + 2] == 'x')
+    else if ((b.grid[toRow0][toCol0 + 2] == 'x') && (&b.grid[toRow0][toCol0] == &b.grid[16][14]) || (&b.grid[toRow0][toCol0] == &b.grid[2][14]))
     {
         if(b.grid[toRow0 - 2][toCol0 + 2] == 'o')
         {
-            if(b.grid[toRow0][toCol0 + 2] == b.grid[16][16])
+            if(&b.grid[toRow0][toCol0 + 2] == &b.grid[16][16])
             {
                 // Remove the enemy from the board
                 b.grid[toRow0][toCol0 + 2] = ' ';
@@ -1098,7 +1098,7 @@ void PlayerOne::checkCornerCapture(Board& b, Referee& r, int toRow0, int toCol0)
           
         else if(b.grid[toRow0 + 2][toCol0 + 2] == 'o')
         {
-            if(b.grid[toRow0][toCol0 + 2] == b.grid[2][16])
+            if(&b.grid[toRow0][toCol0 + 2] == &b.grid[2][16])
             {
                 // Remove the enemy from the board
                 b.grid[toRow0][toCol0 + 2] = ' ';
@@ -1109,11 +1109,11 @@ void PlayerOne::checkCornerCapture(Board& b, Referee& r, int toRow0, int toCol0)
         }
     }
 
-    else if (b.grid[toRow0][toCol0 - 2] == 'x')
+    else if ((b.grid[toRow0][toCol0 - 2] == 'x') && (&b.grid[toRow0][toCol0] == &b.grid[2][4]) || (&b.grid[toRow0][toCol0] == &b.grid[16][4]))
     {
        if(b.grid[toRow0 - 2][toCol0 - 2] == 'o')
         {
-           if(b.grid[toRow0][toCol0 - 2] == b.grid[16][2])
+           if(&b.grid[toRow0][toCol0 - 2] == &b.grid[16][2])
             {
                 // Remove the enemy from the board
                 b.grid[toRow0][toCol0 - 2] = ' ';
@@ -1126,7 +1126,7 @@ void PlayerOne::checkCornerCapture(Board& b, Referee& r, int toRow0, int toCol0)
     
         else if(b.grid[toRow0 + 2][toCol0 - 2] == 'o')
         {
-            if(b.grid[toRow0][toCol0 - 2] == b.grid[2][2])
+            if(&b.grid[toRow0][toCol0 - 2] == &b.grid[2][2])
             {
                 // Remove the enemy from the board
                 b.grid[toRow0][toCol0 - 2] = ' ';
